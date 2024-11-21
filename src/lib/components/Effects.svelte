@@ -1,14 +1,22 @@
 <script>
+    import { onMount } from "svelte";
     let  elapsed = $state(0);
     let interval = $state(1000);
-    let click = new Audio('click.mp3');
+    let audio = $state();
 
+    onMount(()=>{
+        audio  = new Audio('click.mp3');
+         return ()=>{
+            audio = undefined;
+         }
+     });
     $effect(()=> {
         const id = setInterval(()=>{
             elapsed += 1;
-            if(elapsed >100){
+            if(elapsed > 10){
                 elapsed = 0;
-                click.play();
+                audio.load();
+                audio.play();
             }
         },interval);
         return()=>{
