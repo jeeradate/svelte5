@@ -1,14 +1,11 @@
 <script>
 	import { onMount } from "svelte";
     import Effects from "$lib/components/Effects.svelte";
-    import clickSound from '$lib/files/audios/click.mp3'
     let audio = $state();
     let count = $state(0);
 
      onMount(()=>{
-         audio  = new Audio();
-         audio.src = clickSound;
-
+         audio  = new Audio('click.mp3');
          return ()=>{
             audio = undefined;
          }

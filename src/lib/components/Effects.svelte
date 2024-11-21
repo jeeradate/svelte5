@@ -1,14 +1,11 @@
 <script>
     import { onMount } from "svelte";
-    import clickSound from '$lib/files/audios/click.mp3'
     let  elapsed = $state(0);
     let interval = $state(1000);
     let audio = $state();
 
     onMount(()=>{
-         audio  = new Audio();
-         audio.src = clickSound;
-
+        audio  = new Audio('click.mp3');
          return ()=>{
             audio = undefined;
          }
