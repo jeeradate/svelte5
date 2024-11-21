@@ -1,9 +1,22 @@
 <script>
-    let click = new Audio('click.mp3');
-    let count = $state(0);
+	import { onMount } from "svelte";
     import Effects from "$lib/components/Effects.svelte";
+    import clickSound from '$lib/files/audios/click.mp3'
+    let audio = $state();
+    let count = $state(0);
+
+     onMount(()=>{
+         audio  = new Audio();
+         audio.src = clickSound;
+
+         return ()=>{
+            audio = undefined;
+         }
+     });
+
     function onclick(){
-        click.play();
+        audio.load();
+        audio.play();
         count++;
         if(count >5){
             count = 0;
@@ -13,7 +26,7 @@
 
 
 <button {onclick}>
-    clikcs: {count}
+    clicks: {count}
 </button>
 <hr>
 <div style="padding: 30px;">
